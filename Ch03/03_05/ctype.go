@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 )
 
 func main() {
@@ -18,5 +19,18 @@ func main() {
 // HTTP GET request to url
 func contentType(url string) (string, error) {
 	// FIXME
+	res, err := http.Get(url)
+	if err != nil {
+		return "", err
+	}
+	defer res.Body.Close()
+	if res.StatusCode == http.StatusOK {
+		ctype := res.Header.Get("Content-Tye")
+		if ctype == "" {
+			return ctype, fmt.Errorf("content-type Not found")
+		}
+		return ctype, nil
+	}
+
 	return "", nil
 }
