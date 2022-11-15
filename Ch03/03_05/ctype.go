@@ -25,7 +25,7 @@ func contentType(url string) (string, error) {
 	}
 	defer res.Body.Close()
 	if res.StatusCode == http.StatusOK {
-		ctype := res.Header.Get("Content-Tye")
+		ctype := res.Header.Get("Content-Type")
 		if ctype == "" {
 			return ctype, fmt.Errorf("content-type Not found")
 		}
